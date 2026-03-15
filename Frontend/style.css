@@ -329,3 +329,88 @@ code {
   text-decoration: none;
   font-weight: 500;
 }
+
+/* Font Awesome icon sizing in cards */
+.card .icon i {
+  font-size: 26px;
+  background: var(--accent);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Error Card */
+.error-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  max-width: 600px;
+  margin: 0 auto 20px;
+  background: rgba(255, 61, 61, 0.15);
+  border: 1px solid rgba(255, 80, 80, 0.5);
+  border-radius: 12px;
+  padding: 14px 20px;
+  color: #ff8080;
+  font-size: 15px;
+  animation: fadeIn 0.3s ease;
+}
+
+.error-card i:first-child {
+  font-size: 18px;
+  color: #ff5555;
+  flex-shrink: 0;
+}
+
+.error-card span {
+  flex: 1;
+}
+
+.error-close {
+  background: none;
+  border: none;
+  color: #ff8080;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  transition: background 0.2s;
+}
+
+.error-close:hover {
+  background: rgba(255,255,255,0.1);
+}
+
+/* Light mode */
+body.light {
+  background: radial-gradient(circle at top, #e8e0ff, #f5f5ff);
+  color: #1a1a2e;
+}
+
+body.light .navbar,
+body.light .card,
+body.light .result-card {
+  background: rgba(0, 0, 0, 0.05);
+  border-color: rgba(0, 0, 0, 0.12);
+}
+
+body.light .idea-input {
+  background: rgba(0, 0, 0, 0.05);
+  border-color: rgba(0,0,0,0.15);
+  color: #1a1a2e;
+}
+
+body.light .idea-input::placeholder {
+  color: #666;
+}
+
+body.light .result-value,
+body.light .card h3,
+body.light .card a {
+  color: #1a1a2e;
+}
+
+body.light .card p,
+body.light .subtitle {
+  color: #555;
+}
+

@@ -8,6 +8,20 @@ const resetBtn = document.getElementById("resetBtn");
 const featuresSection = document.getElementById("featuresSection");
 const tabButtons = document.querySelectorAll(".tab-btn");
 const tabContents = document.querySelectorAll(".tab-content");
+const errorCard = document.getElementById("errorCard");
+const errorMsg = document.getElementById("errorMsg");
+
+function prefillAndGenerate(idea) {
+  ideaInput.value = idea;
+  window.scrollTo({ top: 0, behavior: "smooth" });
+  generateAllBranding();
+}
+
+function showError(msg) {
+  errorMsg.textContent = msg;
+  errorCard.classList.remove("hidden");
+  errorCard.scrollIntoView({ behavior: "smooth", block: "nearest" });
+}
 
 // Tab switching
 if (tabButtons.length > 0) {
@@ -21,6 +35,18 @@ if (tabButtons.length > 0) {
   });
 }
 
+// Theme toggle
+const themeBtn = document.getElementById("themeBtn");
+if (themeBtn) {
+  themeBtn.addEventListener("click", () => {
+    document.body.classList.toggle("light");
+    const isLight = document.body.classList.contains("light");
+    themeBtn.innerHTML = isLight
+      ? '<i class="fa-solid fa-sun"></i>'
+      : '<i class="fa-solid fa-moon"></i>';
+  });
+}
+
 generateBtn.addEventListener("click", generateAllBranding);
 resetBtn.addEventListener("click", resetForm);
 ideaInput.addEventListener("keypress", (e) => {
@@ -31,9 +57,12 @@ async function generateAllBranding() {
   const idea = ideaInput.value.trim();
   
   if (!idea) {
-    alert("Please enter a business idea");
+    showError("Please enter a business idea.");
     return;
   }
+
+  // Hide any previous error
+  errorCard.classList.add("hidden");
 
   try {
     loadingDiv.classList.remove("hidden");
@@ -48,7 +77,11 @@ async function generateAllBranding() {
       body: JSON.stringify({ idea: idea }),
     });
 
-    if (!brandResponse.ok) throw new Error(`Brand API Error: ${brandResponse.status}`);
+    if (!brandResponse.ok) {
+      const errData = await brandResponse.json().catch(() => ({}));
+      const detail = errData.detail || `Brand API Error: ${brandResponse.status}`;
+      throw new Error(detail);
+    }
     const brandData = await brandResponse.json();
 
     // Generate copy
@@ -127,7 +160,11 @@ async function generateAllBranding() {
   } catch (error) {
     console.error("Error:", error);
     loadingDiv.classList.add("hidden");
-    alert("Error generating brand: " + error.message);
+    // Show friendly message for invalid input (422) vs other errors
+    const msg = error.message.includes("422") || error.message.toLowerCase().includes("invalid")
+      ? "⚠️ Invalid input: please enter a meaningful business idea (e.g. 'AI healthcare startup')."
+      : "Error generating brand: " + error.message;
+    showError(msg);
   } finally {
     generateBtn.disabled = false;
   }

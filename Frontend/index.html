@@ -7,6 +7,8 @@
   <link rel="stylesheet" href="style.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-Avb2QiuDEEvB4bZJYdab3SnYqzezrJCQSXJbLhqr0pTF7QP7j5M4/5UhCU6HY/d8g1q6V1gXfKkJVs7+JhzA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
 
@@ -21,7 +23,7 @@
       <select class="lang-select">
         <option>English</option>
       </select>
-      <button class="theme-btn">🌙</button>
+      <button class="theme-btn" id="themeBtn" title="Toggle dark/light mode"><i class="fa-solid fa-moon"></i></button>
     </div>
   </header>
 
@@ -42,6 +44,13 @@
         required
       />
       <button class="cta-btn" id="generateBtn">Generate Brand →</button>
+    </div>
+
+    <!-- Error Card -->
+    <div id="errorCard" class="error-card hidden">
+      <i class="fa-solid fa-triangle-exclamation"></i>
+      <span id="errorMsg">Invalid input. Please enter a meaningful business idea.</span>
+      <button onclick="document.getElementById('errorCard').classList.add('hidden')" class="error-close"><i class="fa-solid fa-xmark"></i></button>
     </div>
 
     <!-- Loading State -->
@@ -77,44 +86,44 @@
 
     <!-- Feature Cards -->
     <section class="features" id="featuresSection">
-      <div class="card">
-        <div class="icon">🚀</div>
+      <div class="card" onclick="prefillAndGenerate('Cyberpunk coffee shop')">
+        <div class="icon"><i class="fa-solid fa-dna"></i></div>
         <h3>Brand DNA</h3>
         <p>
-          Don’t just name it, define it.
+          Don't just name it, define it.
           Generate names, mnemonics that stick.
         </p>
-        <a href="#">Explore →</a>
+        <a href="#" onclick="return false;">Explore <i class="fa-solid fa-arrow-right"></i></a>
       </div>
 
-      <div class="card">
-        <div class="icon">🎨</div>
+      <div class="card" onclick="prefillAndGenerate('Minimalist skincare brand')">
+        <div class="icon"><i class="fa-solid fa-palette"></i></div>
         <h3>Visionary Logos</h3>
         <p>
           AI-powered vector logos
           tailored to your niche.
         </p>
-        <a href="#">Explore →</a>
+        <a href="#" onclick="return false;">Explore <i class="fa-solid fa-arrow-right"></i></a>
       </div>
 
-      <div class="card">
-        <div class="icon">✍️</div>
+      <div class="card" onclick="prefillAndGenerate('B2B SaaS for accountants')">
+        <div class="icon"><i class="fa-solid fa-pen-nib"></i></div>
         <h3>Copy Catalyst</h3>
         <p>
           Social posts and descriptions
           that actually convert.
         </p>
-        <a href="#">Explore →</a>
+        <a href="#" onclick="return false;">Explore <i class="fa-solid fa-arrow-right"></i></a>
       </div>
 
-      <div class="card">
-        <div class="icon">🧩</div>
+      <div class="card" onclick="prefillAndGenerate('Eco-friendly hiking gear')">
+        <div class="icon"><i class="fa-solid fa-swatchbook"></i></div>
         <h3>Style Architect</h3>
         <p>
           Full palettes and typography systems
           in one click.
         </p>
-        <a href="#">Explore →</a>
+        <a href="#" onclick="return false;">Explore <i class="fa-solid fa-arrow-right"></i></a>
       </div>
     </section>
   </main>
