@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import RedirectResponse
 from backend.app.api import branding, content, sentiment, summarize, style
-from app.config import settings
+from backend.app.config import settings
 
 app = FastAPI(
     title="BizForge API",
